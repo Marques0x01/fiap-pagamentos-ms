@@ -1,0 +1,23 @@
+# Arquivos de compilação
+*.pyc
+__pycache__/
+
+# Ambiente virtual
+venv/
+env/
+
+# Arquivos de log e caches
+*.log
+*.cache
+.pytest_cache
+
+# Arquivos de configuração locais
+.vscode/
+*.swp
+.DS_Store
+.coverage
+
+# Outros arquivos e diretórios gerados
+dist/
+build/
+*.egg-info/
