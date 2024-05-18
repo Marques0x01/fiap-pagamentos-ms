@@ -45,8 +45,12 @@ jobs:
           source venv/bin/activate
           cd app
           coverage run -m unittest discover -s tests -p "*_test.py"
-          coverage combine
           coverage xml -o coverage-reports/coverage.xml
+          # Verificar se o arquivo de cobertura foi gerado
+          if [ ! -f coverage-reports/coverage.xml ]; then
+            echo "Coverage report not found!"
+            exit 1
+          fi
 
       - name: Verify coverage file
         run: |
