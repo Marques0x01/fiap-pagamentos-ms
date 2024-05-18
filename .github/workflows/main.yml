@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           cd app
@@ -27,26 +28,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
       - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           cd app
           pip install -r requirements.txt
-      - name: Test and coverage
+
+      - name: Run tests and coverage
         run: |
           source venv/bin/activate
           cd app
           coverage run -m unittest discover -s tests -p "*_test.py"
           coverage xml -o coverage-reports/coverage.xml
+
+      - name: Verify coverage file
+        run: |
+          cat app/coverage-reports/coverage.xml
+
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
+        with:
+          args: >
+            -Dsonar.projectKey=fiap-pagamentos-ms
+            -Dsonar.sources=app/src
+            -Dsonar.tests=app/tests
+            -Dsonar.python.coverage.reportPaths=app/coverage-reports/coverage.xml
+            -Dsonar.exclusions=**/__pycache__/**,**/*.pyc,**/migrations/**
+            -Dsonar.sourceEncoding=UTF-8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
       - name: SonarQube Quality Gate
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
@@ -58,20 +76,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
       - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
           cd app
           pip install -r requirements.txt
+
       - name: Run BDD tests
         run: |
           source venv/bin/activate
           cd app/tests/automated
-          ls
           behave
 
   Publish:
@@ -81,18 +101,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           cd app
           pip install -r requirements.txt
+
       - name: Terraform init
         run: |
           cd infra
           terraform init
+
       - name: Terraform plan
         run: |
           cd infra
           terraform plan
+
       - name: Terraform apply
         run: |
           cd infra
