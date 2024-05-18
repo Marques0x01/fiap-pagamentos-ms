@@ -10,7 +10,7 @@ class PagseguroService:
                 'nome': id_cliente,
                 'beneficiario': id_beneficiario,
                 'valor': valor_pagamento,
-                'data_pagamento': datetime.now(), 
+                'data_pagamento': datetime.now().isoformat(), 
                 'status': 200, 
                 'message': 'Pagamento realizado com sucesso'
             }
