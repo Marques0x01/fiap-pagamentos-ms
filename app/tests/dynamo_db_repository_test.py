@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from src.pagamento.dynamodb.repositories.dynamo_db_repository import DynamoDBRepository
+from app.src.pagamento.dynamodb.repositories.dynamo_db_repository import DynamoDBRepository
 
 class TestDynamoDBRepository(unittest.TestCase):
     def test_put_item_sucesso(self):

@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from lambda_function import lambda_handler
+from app.lambda_function import lambda_handler
 
 class TestLambdaHandler(unittest.TestCase):
     def setUp(self):

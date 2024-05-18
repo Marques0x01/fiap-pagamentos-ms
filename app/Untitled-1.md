@@ -30,9 +30,6 @@ https://github.com/Marques0x01/fiap_rds_infra
 https://github.com/Marques0x01/fiap_api_gateway
 https://github.com/Marques0x01/fiap_lambda_auth
 
-
-Para executar os testes basta utilizar o comando abaixo
-python -m unittest discover -s src/tests -p "*_test.py"
 # comando para executar os testes + cobertura
-coverage run -m unittest discover -s app/src/tests -p "*_test.py"
+coverage run -m unittest discover -s tests -p "*_test.py
 coverage xml -o coverage-reports/coverage.xml
