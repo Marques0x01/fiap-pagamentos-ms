@@ -32,10 +32,13 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install dependencies
         run: |
+          python -m venv venv
+          source venv/bin/activate
           cd app
           pip install -r requirements.txt
       - name: Test and coverage
         run: |
+          source venv/bin/activate
           cd app/src/tests
           coverage run -m unittest discover -s . -p "*_test.py"
           coverage xml -o ../../coverage-reports/coverage.xml
