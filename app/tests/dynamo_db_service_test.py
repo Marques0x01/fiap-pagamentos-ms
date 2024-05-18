@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
-from app.src.pagamento.dynamodb.repositories.dynamo_db_repository import DynamoDBRepository
-from app.src.pagamento.dynamodb.services.dynamo_db_service import DynamoDBService
+from src.pagamento.dynamodb.repositories.dynamo_db_repository import DynamoDBRepository
+from src.pagamento.dynamodb.services.dynamo_db_service import DynamoDBService
 
 class TestDynamoDBService(unittest.TestCase):
     def setUp(self):

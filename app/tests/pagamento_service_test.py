@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import MagicMock
-from app.src.pagamento.dynamodb.services.dynamo_db_service import DynamoDBService
-from app.src.pagamento.pagseguro.services.pagseguro_service import PagseguroService
-from app.src.models.pagamento_model import PagamentoModel
-from app.src.services.pagamento_service import PagamentoService
+from src.pagamento.dynamodb.services.dynamo_db_service import DynamoDBService
+from src.pagamento.pagseguro.services.pagseguro_service import PagseguroService
+from src.models.pagamento_model import PagamentoModel
+from src.services.pagamento_service import PagamentoService
 
 class TestPagamentoService(unittest.TestCase):
     def setUp(self):
