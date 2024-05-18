@@ -59,14 +59,6 @@ jobs:
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
-        with:
-          args: >
-            -Dsonar.projectKey=fiap-pagamentos-ms
-            -Dsonar.sources=app/src
-            -Dsonar.tests=app/tests
-            -Dsonar.python.coverage.reportPaths=app/coverage-reports/coverage.xml
-            -Dsonar.exclusions=**/__pycache__/**,**/*.pyc,**/migrations/**
-            -Dsonar.sourceEncoding=UTF-8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
