@@ -39,9 +39,9 @@ jobs:
       - name: Test and coverage
         run: |
           source venv/bin/activate
-          cd app/src/tests
-          coverage run -m unittest discover -s . -p "*_test.py"
-          coverage xml -o ../../coverage-reports/coverage.xml
+          cd app
+          coverage run -m unittest discover -s src/tests -p "*_test.py"
+          coverage xml -o coverage-reports/coverage.xml
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
