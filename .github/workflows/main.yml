@@ -42,6 +42,7 @@ jobs:
           cd app
           coverage run -m unittest discover -s tests -p "*_test.py"
           coverage xml -o coverage-reports/coverage.xml
+          sonar-scanner
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
