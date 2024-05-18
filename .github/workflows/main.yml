@@ -51,6 +51,7 @@ jobs:
         run: |
           cd app
           sed -i 's|/home/runner/work/fiap-pagamentos-ms/fiap-pagamentos-ms/app|.|g' coverage-reports/coverage.xml
+          sed -i 's|filename="|filename="app/|g' coverage-reports/coverage.xml
           cat coverage-reports/coverage.xml
 
       - name: SonarQube Scan
