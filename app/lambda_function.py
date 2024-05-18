@@ -8,7 +8,7 @@ from src.models.pagamento_model import PagamentoModel
 
 try:
     table_name = 'fiap_pagamentos'
-    dynamo_repository = DynamoDBRepository(table_name, boto3.resource('dynamodb'))
+    dynamo_repository = DynamoDBRepository(table_name, boto3.resource('dynamodb', region_name='sa-east-1'))
     dynamo_service = DynamoDBService(dynamo_repository)
     pagamento_service = PagamentoService(dynamo_service, PagseguroService())
 except Exception as ex:
