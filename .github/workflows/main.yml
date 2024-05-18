@@ -61,9 +61,11 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install dependencies
         run: |
+          python -m venv venv
           source venv/bin/activate
           cd app
           pip install -r requirements.txt
+          pwd
       - name: Run BDD tests
         run: |
           cd app/tests/automated
