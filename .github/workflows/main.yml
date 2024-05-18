@@ -67,7 +67,6 @@ jobs:
           pip install -r requirements.txt
       - name: Run BDD tests
         run: |
-          tree .
           source venv/bin/activate
           cd app/tests/automated
           ls

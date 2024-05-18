@@ -1,3 +1,8 @@
+import sys
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = current_dir.replace(os.path.join('tests', 'automated', 'steps'), '')
+sys.path.append(src_dir)
 from behave import given, when, then
 from unittest.mock import MagicMock
 from src.pagamento.dynamodb.services.dynamo_db_service import DynamoDBService
