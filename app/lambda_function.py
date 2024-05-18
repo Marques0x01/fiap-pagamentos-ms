@@ -21,10 +21,3 @@ def lambda_handler(event, context):
         return pagamento_service.realizar_pagamento(pagamento)
     except ValueError:
         return {'statusCode': 400, 'body': json.dumps({'message': 'Invalid JSON'})}
-
-
-# payload = {
-#     'body': "{\"id_cliente\":\"jamal\",\"id_pedido\":\"jamal\",\"tipo_pagamento\":\"PIX\",\"valor_pagamento\":\"70.00\"}"
-# }
-
-# lambda_handler(payload, None)

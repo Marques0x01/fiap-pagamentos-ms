@@ -10,7 +10,7 @@ class TestLambdaHandler(unittest.TestCase):
 
     def test_lambda_handler_com_json_valido_erro_ao_persistir_dado(self):
         # Configuração dos mocks
-        event = {'body': '{"id_cliente":"jamal","valor_pagamento":"70.00","id_pedido":"666","tipo_pagamento":"PIX"}'}
+        event = {'body': '{"id_cliente":"","valor_pagamento":"70.00","id_pedido":"666","tipo_pagamento":"PIX"}'}
         context = MagicMock()
 
         # Chamada ao lambda_handler com mocks passados como argumentos
