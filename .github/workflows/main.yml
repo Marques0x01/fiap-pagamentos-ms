@@ -46,22 +46,25 @@ jobs:
           cd app
           coverage run -m unittest discover -s tests -p "*_test.py"
           coverage xml -o coverage-reports/coverage.xml
-          # Verificar se o arquivo de cobertura foi gerado
-          if [ ! -f coverage-reports/coverage.xml ]; then
-            echo "Coverage report not found!"
-            exit 1
-          fi
 
-      - name: Verify coverage file
+      - name: Adjust coverage paths
         run: |
-          sed -i 's|/github/workspace|/home/runner/work/fiap-pagamentos-ms/fiap-pagamentos-ms|g' app/coverage-reports/coverage.xml
-          cat app/coverage-reports/coverage.xml
+          cd app
+          sed -i 's|/home/runner/work/fiap-pagamentos-ms/fiap-pagamentos-ms/app|.|g' coverage-reports/coverage.xml
+          sed -i 's|filename="|filename="src/|g' coverage-reports/coverage.xml
+          cat coverage-reports/coverage.xml
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=fiap-pagamentos-ms
+            -Dsonar.sources=app/src
+            -Dsonar.tests=app/tests
+            -Dsonar.python.coverage.reportPaths=app/coverage-reports/coverage.xml
 
       - name: SonarQube Quality Gate
         uses: sonarsource/sonarqube-quality-gate-action@master
