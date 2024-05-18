@@ -68,6 +68,7 @@ jobs:
           pwd
       - name: Run BDD tests
         run: |
+          source venv/bin/activate
           cd app/tests/automated
           behave
 
