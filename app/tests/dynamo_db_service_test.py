@@ -15,7 +15,7 @@ class TestDynamoDBService(unittest.TestCase):
         response = self.service.add_item(item)
 
         self.repository.put_item.assert_called_once_with(item)
-        self.assertEqual(response, {'statusCode': 200, 'body': {'message': 'Item inserido com sucesso'}})
+        self.assertEqual(response, {'statusCode': 200, 'body': '{"message": "Item inserido com sucesso"}'})
 
     def test_add_item_failure(self):
         item = {'key': 'value'}
@@ -24,7 +24,7 @@ class TestDynamoDBService(unittest.TestCase):
         response = self.service.add_item(item)
 
         self.repository.put_item.assert_called_once_with(item)
-        self.assertEqual(response, {'statusCode': 500, 'body': {'message': 'Erro ao inserir item na tabela: error'}})
+        self.assertEqual(response, {'statusCode': 500, 'body': '{"message": "Erro ao inserir item na tabela: error"}'})
 
 if __name__ == '__main__':
     unittest.main()

@@ -23,7 +23,7 @@ def step_given_pagamento(context, cliente, valor):
 @given('o serviço de PagSeguro está funcionando corretamente')
 def step_given_pagseguro_service(context):
     context.pagseguro_service_mock = MagicMock(spec=PagseguroService)
-    context.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'status': 200}
+    context.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'statusCode': 200}
     print("Step: Given o serviço de PagSeguro está funcionando corretamente")
 
 @given('o serviço DynamoDB está funcionando corretamente')
@@ -46,7 +46,7 @@ def step_when_pagamento_realizado(context):
 
 @then('o pagamento é efetuado com sucesso')
 def step_then_pagamento_sucesso(context):
-    assert context.resultado == {'status': 200}
+    assert context.resultado == {'statusCode': 200}
     print("Step: Then o pagamento é efetuado com sucesso")
 
 @then('a persistência do pagamento falha')

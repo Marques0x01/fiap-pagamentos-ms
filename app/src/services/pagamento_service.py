@@ -21,8 +21,8 @@ class PagamentoService:
         response_pagseguro: dict = self.__pagseguro_service.efetivar_pagamento_mock(
                                         pagamento_request.id_cliente,
                                         pagamento_request.valor_pagamento)
-        
-        if response_pagseguro.get('status') != 200:
+
+        if response_pagseguro.get('statusCode') != 200:
             return response_pagseguro
 
         resultado_persistencia = self.__dynamo_service.add_item(pagamento_request.to_dict())
