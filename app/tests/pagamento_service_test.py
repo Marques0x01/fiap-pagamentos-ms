@@ -15,7 +15,7 @@ class TestPagamentoService(unittest.TestCase):
     def test_realizar_pagamento_com_sucesso(self):
         # Configuração dos mocks
         pagamento_request_mock = PagamentoModel(id_cliente='666', id_pedido='666', tipo_pagamento='PIQUIS', valor_pagamento='220')
-        self.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'status': 200}
+        self.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'statusCode': 200}
         self.dynamo_service_mock.add_item.return_value = {'statusCode': 200}
 
         # Chamada ao método realizar_pagamento
@@ -23,24 +23,24 @@ class TestPagamentoService(unittest.TestCase):
 
         # Verificações
         self.assertIsNotNone(resultado)
-        self.assertEqual(resultado, {'status': 200})
+        self.assertEqual(resultado, {'statusCode': 200})
 
     def test_realizar_pagamento_com_falha_no_pagseguro(self):
         # Configuração dos mocks
         pagamento_request_mock = PagamentoModel(id_cliente='666', id_pedido='666', tipo_pagamento='PIQUIS', valor_pagamento='220')
-        self.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'status': 400}
+        self.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'statusCode': 400}
 
         # Chamada ao método realizar_pagamento
         resultado = self.pagamento_service.realizar_pagamento(pagamento_request_mock)
 
         # Verificações
         self.assertIsNotNone(resultado)
-        self.assertEqual(resultado, {'status': 400})
+        self.assertEqual(resultado, {'statusCode': 400})
 
     def test_realizar_pagamento_com_falha_na_persistencia(self):
         # Configuração dos mocks
         pagamento_request_mock = PagamentoModel(id_cliente='666', id_pedido='666', tipo_pagamento='PIQUIS', valor_pagamento='220')
-        self.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'status': 200}
+        self.pagseguro_service_mock.efetivar_pagamento_mock.return_value = {'statusCode': 200}
         self.dynamo_service_mock.add_item.return_value = {'statusCode': 500}
 
         # Chamada ao método realizar_pagamento

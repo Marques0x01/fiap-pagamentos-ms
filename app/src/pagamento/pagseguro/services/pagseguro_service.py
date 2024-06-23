@@ -1,4 +1,5 @@
 from datetime import datetime
+from json import dumps
 
 
 class PagseguroService:
@@ -6,11 +7,10 @@ class PagseguroService:
         pass
 
     def efetivar_pagamento_mock(self, id_cliente: str, valor_pagamento: str, id_beneficiario='FIAP Lanches') -> dict:
-        return {
+        return {'statusCode': 200, 'body': dumps({
                 'nome': id_cliente,
                 'beneficiario': id_beneficiario,
                 'valor': valor_pagamento,
                 'data_pagamento': datetime.now().isoformat(), 
-                'status': 200, 
                 'message': 'Pagamento realizado com sucesso'
-            }
+            })}

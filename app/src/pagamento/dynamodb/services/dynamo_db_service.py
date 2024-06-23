@@ -7,6 +7,6 @@ class DynamoDBService:
     def add_item(self, item: dict):
         success, response = self.__repository.put_item(item)
         if success:
-            return {'statusCode': 200, 'body': {'message': 'Item inserido com sucesso'}}
+            return {'statusCode': 200, 'body': dumps({'message': 'Item inserido com sucesso'})}
         else:
-            return {'statusCode': 500, 'body': {'message': f'Erro ao inserir item na tabela: {response}'}}
+            return {'statusCode': 500, 'body': dumps({'message': f'Erro ao inserir item na tabela: {response}'})}
