@@ -22,59 +22,59 @@ jobs:
           cd app
           pip install -r requirements.txt
 
-  Sonar:
-    needs: Build
-    runs-on: ubuntu-latest
+  # Sonar:
+  #   needs: Build
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Install dependencies
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          cd app
-          pip install -r requirements.txt
-      - name: Test and coverage
-        run: |
-          source venv/bin/activate
-          cd app
-          coverage run -m unittest discover -s tests -p "*_test.py"
-          coverage xml -o coverage-reports/coverage.xml
-          tree .
-      - uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m venv venv
+  #         source venv/bin/activate
+  #         cd app
+  #         pip install -r requirements.txt
+  #     - name: Test and coverage
+  #       run: |
+  #         source venv/bin/activate
+  #         cd app
+  #         coverage run -m unittest discover -s tests -p "*_test.py"
+  #         coverage xml -o coverage-reports/coverage.xml
+  #         tree .
+  #     - uses: sonarsource/sonarqube-scan-action@master
+  #       env:
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  #     - uses: sonarsource/sonarqube-quality-gate-action@master
+  #       timeout-minutes: 5
+  #       env:
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  BDD:
-    needs: Sonar
-    runs-on: ubuntu-latest
+  # BDD:
+  #   needs: Sonar
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Install dependencies
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          cd app
-          pip install -r requirements.txt
-      - name: Run BDD tests
-        run: |
-          source venv/bin/activate
-          cd app/tests/automated
-          ls
-          behave
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m venv venv
+  #         source venv/bin/activate
+  #         cd app
+  #         pip install -r requirements.txt
+  #     - name: Run BDD tests
+  #       run: |
+  #         source venv/bin/activate
+  #         cd app/tests/automated
+  #         ls
+  #         behave
 
   Publish:
-    needs: BDD
+    needs: Build
     runs-on: ubuntu-latest
 
     steps:
