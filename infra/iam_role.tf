@@ -23,7 +23,8 @@ resource "aws_iam_policy" "lambda_policies" {
         Effect = "Allow",
         Action = [
           "secretsmanager:Decrypt",
-          "dynamodb:*"
+          "dynamodb:*",
+          "lambda:*"
         ],
         Resource = "*"
       }
