@@ -22,7 +22,7 @@ variable "bucket_backend_name" {
 variable "region" {
   description = "Region name"
   type        = string
-  default     = "us-east-1"
+  default     = "us-east-2"
 }
 
 variable "env_vars" {

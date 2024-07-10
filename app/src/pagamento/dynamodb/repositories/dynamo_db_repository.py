@@ -9,3 +9,12 @@ class DynamoDBRepository:
             return True, response
         except Exception as e:
             return False, str(e)
+
+    def update_item(self, pk, sk, update_expression, expression_attribute_values):
+        response = self.__table.update_item(
+            Key={'pk': pk, 'sk': sk},
+            UpdateExpression=update_expression,
+            ExpressionAttributeValues=expression_attribute_values,
+            ReturnValues="UPDATED_NEW"
+        )
+        return response
