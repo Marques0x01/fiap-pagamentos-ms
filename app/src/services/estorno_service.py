@@ -38,7 +38,7 @@ class EstornoService:
                 self.__notificacao_estorno.send_message(
                     message=f"Estorno realizado com sucesso para o item com PK: {pk} e SK: {sk}",
                     subject="Estorno realizado com sucesso",
-                    topic_arn="arn:aws:sns:us-east-2:767398154314:notificacao_pagamento"
+                    topic_arn="arn:aws:sns:us-east-2:381492057057:notificacao_pagamento"
                 )
                 return {'statusCode': 200, 'body': resultado_atualizacao['Attributes']}
             else:
@@ -49,6 +49,6 @@ class EstornoService:
             self.__notificacao_estorno.send_message(
                 message=error_message,
                 subject="Erro ao processar o estorno",
-                topic_arn="arn:aws:sns:us-east-2:767398154314:notificacao_pagamento"
+                topic_arn="arn:aws:sns:us-east-2:381492057057:notificacao_pagamento"
             )
             return {'statusCode': 500, 'message': error_message}
