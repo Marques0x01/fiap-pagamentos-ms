@@ -40,7 +40,7 @@ class PagamentoService:
                 self.__notificacao_pagamento.send_message(
                     message=str(response_pagseguro),
                     subject='Ocorreu um problema ao efetivar o pagamento',
-                    topic_arn='arn:aws:sns:us-east-2:767398154314:notificacao_pagamento'
+                    topic_arn='arn:aws:sns:us-east-2:381492057057:notificacao_pagamento'
                 )
                 return response_pagseguro
 
@@ -54,7 +54,7 @@ class PagamentoService:
                 self.__notificacao_pagamento.send_message(
                     message=str(pagamento_request.to_dict()),
                     subject='Pagamento realizado com sucesso',
-                    topic_arn='arn:aws:sns:us-east-2:767398154314:notificacao_pagamento'
+                    topic_arn='arn:aws:sns:us-east-2:381492057057:notificacao_pagamento'
                 )
                 return response_pagseguro
             else:
@@ -62,7 +62,7 @@ class PagamentoService:
                 self.__notificacao_pagamento.send_message(
                     message=str(resultado_persistencia),
                     subject='Erro ao persistir dados do pagamento',
-                    topic_arn='arn:aws:sns:us-east-2:767398154314:notificacao_pagamento'
+                    topic_arn='arn:aws:sns:us-east-2:381492057057:notificacao_pagamento'
                 )
                 return resultado_persistencia
 
@@ -73,6 +73,6 @@ class PagamentoService:
             self.__notificacao_pagamento.send_message(
                 message=error_message,
                 subject='Erro ao processar o pagamento',
-                topic_arn='arn:aws:sns:us-east-2:767398154314:notificacao_pagamento'
+                topic_arn='arn:aws:sns:us-east-2:381492057057:notificacao_pagamento'
             )
             return {'statusCode': 500, 'message': error_message}
