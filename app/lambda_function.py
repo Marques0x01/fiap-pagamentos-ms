@@ -27,9 +27,9 @@ def lambda_handler(event, context):
             return {'statusCode': 405, 'body': json.dumps({'message': 'Method Not Allowed'})}
 
         data = json.loads(event['body'])
-        pagamento = PagamentoModel(**data)
         
         if event['httpMethod'] == 'POST':
+            pagamento = PagamentoModel(**data)
             response = pagamento_service.realizar_pagamento(pagamento)
         elif event['httpMethod'] == 'PUT':
             # Aqui você pode definir o comportamento para requisições PUT, se necessário.
